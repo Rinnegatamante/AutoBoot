@@ -2,7 +2,6 @@
 #include <taihen.h>
 #include <libk/stdio.h>
 #include <libk/string.h>
-#include <kuio.h>
 
 #define DEBUG_FILE "MLCL00001"
 
@@ -23,11 +22,10 @@ int launchAppByTitleid(const char *titleid) {
 
 void _start() __attribute__ ((weak, alias ("module_start")));
 int module_start(SceSize argc, const void *args) {
-	SceUID fd;
-	kuIoOpen("ux0:/data/AutoBoot/boot.cfg", SCE_O_RDONLY, &fd);
+	SceUID fd = sceIoOpen("ux0:/data/AutoBoot/boot.cfg", SCE_O_RDONLY, 0777);
 	if (fd >= 0){
-		kuIoRead(fd, titleid, 9);
-		kuIoClose(fd);
+		sceIoRead(fd, titleid, 9);
+		sceIoClose(fd);
 		titleid[9] = 0;
 		launchAppByTitleid(titleid);
 	}

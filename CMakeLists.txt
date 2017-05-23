@@ -34,7 +34,7 @@ target_link_libraries(AutoBoot
   SceLibKernel_stub
   SceKernelThreadMgr_stub
   SceAppMgr_stub_weak
-  kuio_stub
+  SceIofilemgr_stub
   k
   gcc
 )
